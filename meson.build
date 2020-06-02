@@ -1,5 +1,5 @@
 # Copyright © 2018 Dylan Baker
-# Copyright © 2018 Intel Corporation
+# Copyright © 2018,2020 Intel Corporation
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -102,7 +102,7 @@ add_project_arguments('-DHAVE_EXPAT_CONFIG_H', language : ['c'])
 if cc.has_argument('-fno-strict-aliasing')
   add_project_arguments('-fno-strict-aliasing', language : ['c'])
 endif
-if cc.get_id() == 'msvc'
+if ['msvc', 'clang-cl', 'intel-cl'].contains(cc.get_id())
   add_project_arguments('-D_CRT_SECURE_NO_WARNINGS', '-wd4996', language : ['c'])
   if get_option('default_library') == 'static'
     add_project_arguments('-DXML_STATIC', language : ['c'])
